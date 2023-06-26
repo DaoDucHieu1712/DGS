@@ -1,0 +1,14 @@
+C:\Users\ADMIN\OneDrive\Desktop\FPT\PRJ\DGS\backend\DGS\BusinessObjects\bin\Debug\net6.0\DGS.BusinessObjects.deps.json
+C:\Users\ADMIN\OneDrive\Desktop\FPT\PRJ\DGS\backend\DGS\BusinessObjects\bin\Debug\net6.0\DGS.BusinessObjects.runtimeconfig.json
+C:\Users\ADMIN\OneDrive\Desktop\FPT\PRJ\DGS\backend\DGS\BusinessObjects\bin\Debug\net6.0\DGS.BusinessObjects.dll
+C:\Users\ADMIN\OneDrive\Desktop\FPT\PRJ\DGS\backend\DGS\BusinessObjects\bin\Debug\net6.0\DGS.BusinessObjects.pdb
+C:\Users\ADMIN\OneDrive\Desktop\FPT\PRJ\DGS\backend\DGS\BusinessObjects\obj\Debug\net6.0\DGS.BusinessObjects.csproj.AssemblyReference.cache
+C:\Users\ADMIN\OneDrive\Desktop\FPT\PRJ\DGS\backend\DGS\BusinessObjects\obj\Debug\net6.0\DGS.BusinessObjects.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ADMIN\OneDrive\Desktop\FPT\PRJ\DGS\backend\DGS\BusinessObjects\obj\Debug\net6.0\DGS.BusinessObjects.AssemblyInfoInputs.cache
+C:\Users\ADMIN\OneDrive\Desktop\FPT\PRJ\DGS\backend\DGS\BusinessObjects\obj\Debug\net6.0\DGS.BusinessObjects.AssemblyInfo.cs
+C:\Users\ADMIN\OneDrive\Desktop\FPT\PRJ\DGS\backend\DGS\BusinessObjects\obj\Debug\net6.0\DGS.BusinessObjects.csproj.CoreCompileInputs.cache
+C:\Users\ADMIN\OneDrive\Desktop\FPT\PRJ\DGS\backend\DGS\BusinessObjects\obj\Debug\net6.0\DGS.BusinessObjects.dll
+C:\Users\ADMIN\OneDrive\Desktop\FPT\PRJ\DGS\backend\DGS\BusinessObjects\obj\Debug\net6.0\refint\DGS.BusinessObjects.dll
+C:\Users\ADMIN\OneDrive\Desktop\FPT\PRJ\DGS\backend\DGS\BusinessObjects\obj\Debug\net6.0\DGS.BusinessObjects.pdb
+C:\Users\ADMIN\OneDrive\Desktop\FPT\PRJ\DGS\backend\DGS\BusinessObjects\obj\Debug\net6.0\DGS.BusinessObjects.genruntimeconfig.cache
+C:\Users\ADMIN\OneDrive\Desktop\FPT\PRJ\DGS\backend\DGS\BusinessObjects\obj\Debug\net6.0\ref\DGS.BusinessObjects.dll

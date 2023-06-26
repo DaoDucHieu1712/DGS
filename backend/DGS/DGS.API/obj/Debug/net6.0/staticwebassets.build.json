@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "saHyTr1ZVt5UZ9rIXwPPmQ815cBjOHfeJsfocWHwAgk=",
+  "Source": "DGS.API",
+  "BasePath": "_content/DGS.API",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

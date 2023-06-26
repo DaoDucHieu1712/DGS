@@ -1,0 +1,15 @@
+C:\Users\ADMIN\OneDrive\Desktop\FPT\PRJ\DGS\backend\DGS\DataAccess\bin\Debug\net6.0\DGS.DataAccess.deps.json
+C:\Users\ADMIN\OneDrive\Desktop\FPT\PRJ\DGS\backend\DGS\DataAccess\bin\Debug\net6.0\DGS.DataAccess.dll
+C:\Users\ADMIN\OneDrive\Desktop\FPT\PRJ\DGS\backend\DGS\DataAccess\bin\Debug\net6.0\DGS.DataAccess.pdb
+C:\Users\ADMIN\OneDrive\Desktop\FPT\PRJ\DGS\backend\DGS\DataAccess\bin\Debug\net6.0\DGS.BusinessObjects.dll
+C:\Users\ADMIN\OneDrive\Desktop\FPT\PRJ\DGS\backend\DGS\DataAccess\bin\Debug\net6.0\DGS.BusinessObjects.pdb
+C:\Users\ADMIN\OneDrive\Desktop\FPT\PRJ\DGS\backend\DGS\DataAccess\obj\Debug\net6.0\DGS.DataAccess.csproj.AssemblyReference.cache
+C:\Users\ADMIN\OneDrive\Desktop\FPT\PRJ\DGS\backend\DGS\DataAccess\obj\Debug\net6.0\DGS.DataAccess.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ADMIN\OneDrive\Desktop\FPT\PRJ\DGS\backend\DGS\DataAccess\obj\Debug\net6.0\DGS.DataAccess.AssemblyInfoInputs.cache
+C:\Users\ADMIN\OneDrive\Desktop\FPT\PRJ\DGS\backend\DGS\DataAccess\obj\Debug\net6.0\DGS.DataAccess.AssemblyInfo.cs
+C:\Users\ADMIN\OneDrive\Desktop\FPT\PRJ\DGS\backend\DGS\DataAccess\obj\Debug\net6.0\DGS.DataAccess.csproj.CoreCompileInputs.cache
+C:\Users\ADMIN\OneDrive\Desktop\FPT\PRJ\DGS\backend\DGS\DataAccess\obj\Debug\net6.0\DGS.DataAccess.csproj.CopyComplete
+C:\Users\ADMIN\OneDrive\Desktop\FPT\PRJ\DGS\backend\DGS\DataAccess\obj\Debug\net6.0\DGS.DataAccess.dll
+C:\Users\ADMIN\OneDrive\Desktop\FPT\PRJ\DGS\backend\DGS\DataAccess\obj\Debug\net6.0\refint\DGS.DataAccess.dll
+C:\Users\ADMIN\OneDrive\Desktop\FPT\PRJ\DGS\backend\DGS\DataAccess\obj\Debug\net6.0\DGS.DataAccess.pdb
+C:\Users\ADMIN\OneDrive\Desktop\FPT\PRJ\DGS\backend\DGS\DataAccess\obj\Debug\net6.0\ref\DGS.DataAccess.dll

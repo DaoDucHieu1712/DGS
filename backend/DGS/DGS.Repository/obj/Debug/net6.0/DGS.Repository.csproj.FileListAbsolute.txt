@@ -1,0 +1,17 @@
+C:\Users\ADMIN\OneDrive\Desktop\FPT\PRJ\DGS\backend\DGS\DGS.Repository\bin\Debug\net6.0\DGS.Repository.deps.json
+C:\Users\ADMIN\OneDrive\Desktop\FPT\PRJ\DGS\backend\DGS\DGS.Repository\bin\Debug\net6.0\DGS.Repository.dll
+C:\Users\ADMIN\OneDrive\Desktop\FPT\PRJ\DGS\backend\DGS\DGS.Repository\bin\Debug\net6.0\DGS.Repository.pdb
+C:\Users\ADMIN\OneDrive\Desktop\FPT\PRJ\DGS\backend\DGS\DGS.Repository\bin\Debug\net6.0\DGS.BusinessObjects.dll
+C:\Users\ADMIN\OneDrive\Desktop\FPT\PRJ\DGS\backend\DGS\DGS.Repository\bin\Debug\net6.0\DGS.DataAccess.dll
+C:\Users\ADMIN\OneDrive\Desktop\FPT\PRJ\DGS\backend\DGS\DGS.Repository\bin\Debug\net6.0\DGS.DataAccess.pdb
+C:\Users\ADMIN\OneDrive\Desktop\FPT\PRJ\DGS\backend\DGS\DGS.Repository\bin\Debug\net6.0\DGS.BusinessObjects.pdb
+C:\Users\ADMIN\OneDrive\Desktop\FPT\PRJ\DGS\backend\DGS\DGS.Repository\obj\Debug\net6.0\DGS.Repository.csproj.AssemblyReference.cache
+C:\Users\ADMIN\OneDrive\Desktop\FPT\PRJ\DGS\backend\DGS\DGS.Repository\obj\Debug\net6.0\DGS.Repository.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ADMIN\OneDrive\Desktop\FPT\PRJ\DGS\backend\DGS\DGS.Repository\obj\Debug\net6.0\DGS.Repository.AssemblyInfoInputs.cache
+C:\Users\ADMIN\OneDrive\Desktop\FPT\PRJ\DGS\backend\DGS\DGS.Repository\obj\Debug\net6.0\DGS.Repository.AssemblyInfo.cs
+C:\Users\ADMIN\OneDrive\Desktop\FPT\PRJ\DGS\backend\DGS\DGS.Repository\obj\Debug\net6.0\DGS.Repository.csproj.CoreCompileInputs.cache
+C:\Users\ADMIN\OneDrive\Desktop\FPT\PRJ\DGS\backend\DGS\DGS.Repository\obj\Debug\net6.0\DGS.Repository.csproj.CopyComplete
+C:\Users\ADMIN\OneDrive\Desktop\FPT\PRJ\DGS\backend\DGS\DGS.Repository\obj\Debug\net6.0\DGS.Repository.dll
+C:\Users\ADMIN\OneDrive\Desktop\FPT\PRJ\DGS\backend\DGS\DGS.Repository\obj\Debug\net6.0\refint\DGS.Repository.dll
+C:\Users\ADMIN\OneDrive\Desktop\FPT\PRJ\DGS\backend\DGS\DGS.Repository\obj\Debug\net6.0\DGS.Repository.pdb
+C:\Users\ADMIN\OneDrive\Desktop\FPT\PRJ\DGS\backend\DGS\DGS.Repository\obj\Debug\net6.0\ref\DGS.Repository.dll
