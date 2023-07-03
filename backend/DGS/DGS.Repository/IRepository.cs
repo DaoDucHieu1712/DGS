@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DGS.Repository
 {
-    public interface IRepository<T, H, K> where T : class where H : class
+    public interface IRepository<T, H, K> where T : class where H : class 
     {
         Task<List<T>> GetAll();
         Task<T> FindById(K id);

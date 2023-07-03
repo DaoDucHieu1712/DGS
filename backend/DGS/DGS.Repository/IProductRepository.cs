@@ -10,6 +10,8 @@ namespace DGS.Repository
 {
     public interface IProductRepository : IRepository<ProductDTO, ProductCreateUpdateDTO,int>
     {
-        Task<List<ProductDTO>> Filter();
+        Task<ProductFilterAndPagingDTO> Filter(ProductFilterDTO request);
+        Task<List<ProductDTO>> Search(ProductFilterDTO request);
+        Task AddMultiple(List<ProductCreateUpdateDTO> products);    
     }
 }
