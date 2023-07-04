@@ -1,4 +1,5 @@
 ﻿using DGS.BusinessObjects.DTOs.Order;
+using DGS.BusinessObjects.DTOs.OrderDetail;
 using DGS.BusinessObjects.Enums;
 using DGS.Repository;
 using DGS.Repository.Impls;
@@ -89,8 +90,8 @@ namespace DGS.API.Controllers
             }
         }
 
-        [HttpGet("OrderDetail")]
-        public async Task<IActionResult> SaveOrderDetail()
+        [HttpPost("OrderDetail")]
+        public async Task<IActionResult> SaveOrderDetail(OrderDetailCreateUpdateDTO request)
         {
             try
             {

@@ -1,59 +1,57 @@
 "use client";
 import ProductItiem from "@/components/product/ProductItiem";
+import CategoryService from "@/services/categoryService";
+import ProductService from "@/services/productService";
 import { Button, Input, Option, Select } from "@material-tailwind/react";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import { SelectContext } from "@material-tailwind/react/components/Select/SelectContext";
-
-const schema = yup
-  .object({
-    categoryId: yup.string().required(),
-    toPrice: yup.number().positive().integer().required(),
-    fromPrice: yup.number().positive().integer().required(),
-    name: yup.string().required(),
-    sortType: yup.string().required(),
-  })
-  .required();
-
-type FormData = yup.InferType<typeof schema>;
+import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
+import type { SelectOptionProps } from "@material-tailwind/react";
 
 const Shop = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: {
-      errors,
-      isValid,
-      isSubmitted,
-      isSubmitting,
-      isSubmitSuccessful,
+  const [name, setName] = useState<string>("");
+  const [toPrice, setToPrice] = useState<string>("");
+  const [fromPrice, setFromPrice] = useState<string>("");
+  const [categoryId, setCategoryId] = useState<string | undefined>("");
+  const [sortType, setSortType] = useState<string | undefined>("");
+
+  const productsQuery = useQuery({
+    queryKey: ["products-shop", name, toPrice, fromPrice, categoryId, sortType],
+    queryFn: async (context) => {
+      return ProductService.searchWithReactQuery(context);
     },
-  } = useForm<FormData>({
-    resolver: yupResolver(schema),
-    mode: "onChange",
   });
 
-  const onSubmit = (data: FormData) => {
-    console.log(data);
+  const categorysQuery = useQuery({
+    queryKey: ["categorys-shop"],
+    queryFn: async () => {
+      return CategoryService.getAll();
+    },
+  });
+
+  const onReset = () => {
+    setName("");
+    setToPrice("");
+    setFromPrice("");
+    setCategoryId("");
+    setSortType("");
   };
 
   return (
     <>
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="flex items-center justify-center gap-x-3"
-      >
+      <div className="flex items-center justify-center gap-x-3">
         <div className="form-group">
           <select
-            {...register("categoryId")}
-            placeholder="category"
-            className="border py-2 rounded-lg outline-none w-[200px] border-gray-400"
+            onChange={(e) => setCategoryId(e.target.value)}
+            className="peer w-full h-full bg-transparent text-blue-gray-700 font-sans font-normal  px-3 py-2.5 rounded-[7px] border-blue-gray-200 focus:border-blue-500 border "
           >
-            <option value="1">Clothes</option>
-            <option value="2">Pant</option>
-            <option value="3">Bag</option>
-            <option value="4">Sneaker</option>
+            <option value="">All</option>
+            {categorysQuery.data?.map((item) => {
+              return (
+                <option key={item.id} value={item.id.toString()}>
+                  {item.name}
+                </option>
+              );
+            })}
           </select>
         </div>
         <div className="form-group">
@@ -62,7 +60,7 @@ const Shop = () => {
             label="To Price"
             type="number"
             min={0}
-            {...register("toPrice")}
+            onChange={(e) => setToPrice(e.target.value)}
           />
         </div>
         <div className="form-group">
@@ -71,37 +69,38 @@ const Shop = () => {
             label="From Price"
             type="number"
             min={0}
-            {...register("fromPrice")}
+            onChange={(e) => setFromPrice(e.target.value)}
           />
         </div>
         <div className="form-group">
-          <Input color="blue" label="Product Name" {...register("name")} />
+          <Input
+            color="blue"
+            label="Product Name"
+            onChange={(e) => setName(e.target.value)}
+          />
         </div>
         <div className="form-group">
           <select
-            placeholder="sort"
-            {...register("sortType")}
-            className="border py-2 rounded-lg outline-none border-gray-400 w-[200px]"
+            defaultValue={sortType}
+            onChange={(e) => setSortType(e.target.value)}
+            className="peer w-full h-full bg-transparent text-blue-gray-700 font-sans font-normal  px-3 py-2.5 rounded-[7px] border-blue-gray-200 focus:border-blue-500 border "
           >
-            <option>Name - A to Z</option>
-            <option>Name - Z to A</option>
-            <option>Price - Low to High</option>
-            <option>Price - High to Low</option>
+            <option value="name-asc">Name - A to Z</option>
+            <option value="name-desc">Name - Z to A</option>
+            <option value="price-asc">Price - Low to High</option>
+            <option value="price-desc">Price - High to Low</option>
           </select>
         </div>
         <div className="form-group flex gap-x-2">
-          <Button type="submit" color="red">
-            Filter
+          <Button type="submit" color="red" onClick={onReset}>
+            Reset
           </Button>
-          <Button color="blue-gray">Reset</Button>
         </div>
-      </form>
-      <div className="my-6 grid grid-cols-5 gap-x-3">
-        <ProductItiem></ProductItiem>
-        <ProductItiem></ProductItiem>
-        <ProductItiem></ProductItiem>
-        <ProductItiem></ProductItiem>
-        <ProductItiem></ProductItiem>
+      </div>
+      <div className="my-6 grid grid-cols-5 gap-3">
+        {productsQuery.data?.map((item) => {
+          return <ProductItiem key={item.id} item={item}></ProductItiem>;
+        })}
       </div>
     </>
   );

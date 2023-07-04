@@ -141,8 +141,8 @@ namespace DGS.API.Controllers
             }
         }
 
-        [HttpPost("Search")]
-        public async Task<IActionResult> Search(ProductFilterDTO request)
+        [HttpGet("Search")]
+        public async Task<IActionResult> Search([FromQuery] ProductFilterDTO request)
         {
             try
             {

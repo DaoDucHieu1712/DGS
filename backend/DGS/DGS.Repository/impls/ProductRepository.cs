@@ -37,7 +37,7 @@ namespace DGS.Repository.Impls
 
         public async Task<ProductFilterAndPagingDTO> Filter(ProductFilterDTO request)
         {
-            var queryProduct =  await _productDAO.GetList();
+            var queryProduct =  await _productDAO.FindAll(x => x.Category).ToListAsync();
 
             //Sort
             if (request.sortType != null)
@@ -115,7 +115,7 @@ namespace DGS.Repository.Impls
 
         public async Task<List<ProductDTO>> Search(ProductFilterDTO request)
         {
-            var queryProduct = await _productDAO.GetList();
+            var queryProduct = await _productDAO.FindAll(x => x.Category).ToListAsync(); ;
 
             //Sort
             if (request.sortType != null)

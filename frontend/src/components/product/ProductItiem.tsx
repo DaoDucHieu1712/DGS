@@ -1,3 +1,4 @@
+import { Product } from "@/models/Product";
 import {
   Button,
   Card,
@@ -6,25 +7,30 @@ import {
   CardHeader,
   Typography,
 } from "@material-tailwind/react";
-import React from "react";
+import Link from "next/link";
 
-const ProductItiem = () => {
+interface ProductItemProps {
+  item: Product;
+}
+
+const ProductItiem = ({ item }: ProductItemProps) => {
   return (
     <>
       <Card>
         <CardHeader shadow={false} floated={false} className="h-96">
           <img
-            src="https://product.hstatic.net/1000344185/product/8-ta9402-tx01-2_9a9bd344d7f64187b71efc750e862d03.jpg"
+            src={item.image}
+            alt={item.name}
             className="w-full h-full object-cover"
           />
         </CardHeader>
         <CardBody>
           <div className="flex items-center justify-between mb-2">
             <Typography color="blue-gray" className="font-medium">
-              Apple AirPods
+              {item.name}
             </Typography>
             <Typography color="blue-gray" className="font-medium">
-              $95.00
+              {item.price} $
             </Typography>
           </div>
           <Typography
@@ -36,7 +42,7 @@ const ProductItiem = () => {
             and an available wireless charging case.
           </Typography>
         </CardBody>
-        <CardFooter className="pt-0">
+        <CardFooter className="pt-0 flex items-center justify-center gap-x-3">
           <Button
             ripple={false}
             fullWidth={true}
@@ -44,6 +50,12 @@ const ProductItiem = () => {
           >
             Add to Cart
           </Button>
+          <Link
+            href={`/shop/${item.id}`}
+            className="bg-blue-gray-900/10 px-6 py-2 rounded-lg text-blue-gray-900 shadow-none hover:shadow-none hover:scale-105 focus:shadow-none focus:scale-105 active:scale-100"
+          >
+            Detail
+          </Link>
         </CardFooter>
       </Card>
     </>

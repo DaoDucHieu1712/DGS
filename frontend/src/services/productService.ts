@@ -27,8 +27,24 @@ const ProductService = {
     return axiosConfig.post(url, data);
   },
   search(data: any): Promise<Product[]> {
-    const url = "/Product/Search";
-    return axiosConfig.post(url, data);
+    const url =
+      "/Product/Search/?" +
+      `Name=${data.name}&` +
+      `ToPrice=${data.toPrice}&` +
+      `FromPrice=${data.fromPrice}&` +
+      `CategoryId=${data.categoryId}&` +
+      `sortType=${data.sortType}&`;
+    return axiosConfig.get(url);
+  },
+  searchWithReactQuery(context: any): Promise<Product[]> {
+    const url =
+      "/Product/Search?" +
+      `Name=${context.queryKey[1]}&` +
+      `ToPrice=${context.queryKey[2]}&` +
+      `FromPrice=${context.queryKey[3]}&` +
+      `CategoryId=${context.queryKey[4]}&` +
+      `sortType=${context.queryKey[5]}&`;
+    return axiosConfig.get(url);
   },
 };
 
