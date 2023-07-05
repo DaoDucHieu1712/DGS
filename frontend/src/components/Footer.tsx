@@ -3,7 +3,7 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="p-7 grid grid-cols-3">
+    <footer className="p-7 grid grid-cols-3 bg-white fixed bottom-0 right-0 z-50 w-full">
       <div className="font-medium flex gap-x-4">
         <Link href="facebook.com">facebook</Link>
         <Link href="instagram.com">instagram</Link>

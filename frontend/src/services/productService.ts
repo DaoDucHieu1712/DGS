@@ -6,7 +6,7 @@ const ProductService = {
     const url = "/Product";
     return axiosConfig.get(url);
   },
-  getSingle(id: number): Promise<Product> {
+  getSingle(id: string): Promise<Product> {
     const url = `/Product/${id}`;
     return axiosConfig.get(url);
   },

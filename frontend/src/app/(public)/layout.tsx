@@ -9,7 +9,7 @@ export default function LayoutMain({
   return (
     <>
       <Header></Header>
-      <section className="px-7 py-2 my-6">{children}</section>
+      <section className="px-7 py-2 my-12">{children}</section>
       <Footer></Footer>
     </>
   );

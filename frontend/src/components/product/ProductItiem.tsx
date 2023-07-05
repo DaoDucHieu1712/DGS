@@ -1,4 +1,6 @@
+import { CartItem } from "@/models/Cart";
 import { Product } from "@/models/Product";
+import { useAppDispatch } from "@/redux/hooks";
 import {
   Button,
   Card,
@@ -43,16 +45,9 @@ const ProductItiem = ({ item }: ProductItemProps) => {
           </Typography>
         </CardBody>
         <CardFooter className="pt-0 flex items-center justify-center gap-x-3">
-          <Button
-            ripple={false}
-            fullWidth={true}
-            className="bg-blue-gray-900/10 text-blue-gray-900 shadow-none hover:shadow-none hover:scale-105 focus:shadow-none focus:scale-105 active:scale-100"
-          >
-            Add to Cart
-          </Button>
           <Link
             href={`/shop/${item.id}`}
-            className="bg-blue-gray-900/10 px-6 py-2 rounded-lg text-blue-gray-900 shadow-none hover:shadow-none hover:scale-105 focus:shadow-none focus:scale-105 active:scale-100"
+            className="w-full text-center font-medium bg-blue-gray-900/10 px-6 py-2 rounded-lg text-blue-gray-900 shadow-none hover:shadow-none hover:scale-105 focus:shadow-none focus:scale-105 active:scale-100"
           >
             Detail
           </Link>

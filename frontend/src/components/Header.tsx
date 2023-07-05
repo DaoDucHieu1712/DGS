@@ -1,8 +1,17 @@
-import Link from "next/link";
-import React from "react";
-import Logo from "public/logo.png";
+"use client";
+import { cartActions, cartSelector } from "@/features/cartSlice";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import Image from "next/image";
+import Link from "next/link";
+import Logo from "public/logo.png";
+import { useEffect } from "react";
 const Header = () => {
+  const { totalQuantity, cart } = useAppSelector(cartSelector);
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(cartActions.getCartTotal());
+  }, [cart]);
+
   return (
     <header className="p-7">
       <nav className="grid grid-cols-3 text-lg">
@@ -35,8 +44,8 @@ const Header = () => {
           <Link href="/shop" className="hover:text-orange-400">
             wishlist
           </Link>
-          <Link href="/shop" className="hover:text-orange-400">
-            bag (0)
+          <Link href="/cart" className="hover:text-orange-400">
+            bag ({cart.length})
           </Link>
         </div>
       </nav>
