@@ -17,6 +17,10 @@ namespace DGS.Repository.Impls
         private readonly IOrderDAO _orderDAO;
         private readonly IMapper _mapper;
 
+        public OrderRepository()
+        {
+        }
+
         public OrderRepository(IOrderDAO orderDAO, IMapper mapper)
         {
             _orderDAO = orderDAO;
@@ -26,6 +30,12 @@ namespace DGS.Repository.Impls
         public async Task Add(OrderCreateUpdateDTO entity)
         {
             await _orderDAO.Add(_mapper.Map<Order>(entity));
+        }
+
+        public async Task<OrderDTO> CreateAndGet(OrderCreateUpdateDTO request)
+        {
+            var order = _mapper.Map<Order>(request);
+            return _mapper.Map<OrderDTO>(await _orderDAO.CreateAndGetEntity(order));
         }
 
         public async Task<OrderDTO> FindById(int id)

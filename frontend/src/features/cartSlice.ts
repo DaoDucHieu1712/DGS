@@ -60,12 +60,22 @@ const cartSlice = createSlice({
     },
 
     decreaseItemQuantity: (state, action) => {
+      let isRemove = false;
       state.cart = state.cart.map((item) => {
         if (item.productId === action.payload) {
+          if (item.quantity <= 1) {
+            isRemove = true;
+          }
           return { ...item, quantity: item.quantity - 1 };
         }
         return item;
       });
+
+      if (isRemove) {
+        state.cart = state.cart.filter(
+          (item) => item.productId !== action.payload
+        );
+      }
     },
   },
 });

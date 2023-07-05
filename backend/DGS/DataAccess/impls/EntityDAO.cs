@@ -253,5 +253,20 @@ namespace DGS.DataAccess.impls
                 throw new Exception(ex.Message);
             }
         }
+
+        public async Task<T> CreateAndGetEntity(T entity)
+        {
+            try
+            {
+                await _context.AddAsync(entity);
+                await _context.SaveChangesAsync();
+                return await _context.Set<T>().FirstOrDefaultAsync(x => x.Id.Equals(entity.Id));
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

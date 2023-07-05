@@ -23,6 +23,8 @@ namespace DGS.DataAccess.interfaces
 
         Task Add(T entity);
 
+        Task<T> CreateAndGetEntity(T entity);
+
         Task AddMultiple(List<T> entities);
 
         Task Update(T entity, params string[] propertiesToExclude);

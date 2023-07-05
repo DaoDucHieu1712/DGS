@@ -10,12 +10,12 @@ const Cart = () => {
   return (
     <div className="container mx-auto grid grid-cols-3 gap-x-12">
       <div className="col-span-2">
-        <h1 className="font-bold text-2xl">My Cart</h1>
+        <h1 className="font-bold text-2xl mb-3">My Cart</h1>
         <p>You have {cart.length} product with Cart</p>
         {cart.length === 0 ? (
           <p>Your Bag is Empty !!!!!</p>
         ) : (
-          <div className="flex flex-col gap-y-5 cart mt-8 p-7 border-2 rounded-md border-gray-400">
+          <div className="flex flex-col gap-y-5 cart mt-8 border-1 rounded-md border-gray-400">
             {cart.map((item) => {
               return <CartItem key={item.productId} item={item}></CartItem>;
             })}

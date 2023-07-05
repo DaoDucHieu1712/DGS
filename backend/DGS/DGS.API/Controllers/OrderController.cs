@@ -73,6 +73,23 @@ namespace DGS.API.Controllers
             }
         }
 
+        [HttpPost]
+        public async Task<IActionResult> CreateAndGet(OrderCreateUpdateDTO request)
+        {
+            try
+            {
+                return Ok(await orderRepository.CreateAndGet(request));
+            }
+            catch (ApplicationException ae)
+            {
+                return StatusCode(400, ae.Message);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateStatus(int id, OrderStatus status)
         {

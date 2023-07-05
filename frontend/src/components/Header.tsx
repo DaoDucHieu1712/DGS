@@ -35,10 +35,10 @@ const Header = () => {
           </Link>
         </div>
         <div className="flex items-center justify-end gap-x-5 font-medium">
-          <Link href="/shop" className="hover:text-orange-400">
+          <Link href="/login" className="hover:text-orange-400">
             login
           </Link>
-          <Link href="/shop" className="hover:text-orange-400">
+          <Link href="/myOrder" className="hover:text-orange-400">
             orders
           </Link>
           <Link href="/shop" className="hover:text-orange-400">
