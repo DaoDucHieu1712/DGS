@@ -27,6 +27,11 @@ namespace DGS.Repository.Impls
             await _orderDetailDAO.Add(_mapper.Map<OrderDetail>(entity));
         }
 
+        public async Task AddRange(List<OrderDetailCreateUpdateDTO> request)
+        {
+            await _orderDetailDAO.AddMultiple(_mapper.Map<List<OrderDetail>>(request));
+        }
+
         public async Task<OrderDetailDTO> FindById(int id)
         {
             return _mapper.Map<OrderDetailDTO>(await _orderDetailDAO.FindSingle(e => e.Id == id));

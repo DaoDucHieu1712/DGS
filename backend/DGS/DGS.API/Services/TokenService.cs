@@ -25,13 +25,15 @@ namespace DGS.API.Services
             _context = context;
         }
 
-        public async Task<string> GenerateToken(ApplicationUser user, string jti)
+        public async Task<string> GenerateToken(ApplicationUser user)
         {
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["JWT:Secret"]));
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
+
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Email, user.Email),
-                new Claim(ClaimTypes.Name, user.UserName),
-                new Claim(JwtRegisteredClaimNames.Jti, jti),
+                new Claim(ClaimTypes.Name, user.DisplayName),
             };
 
             var roles = await _userManager.GetRolesAsync(user);
@@ -41,14 +43,12 @@ namespace DGS.API.Services
                 claims.Add(new Claim(ClaimTypes.Role, role));
             }
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["JWT:Secret"]));
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
 
             var tokenOptions = new JwtSecurityToken
             (
                 issuer: _config["JWT:Issuer"],
                 audience: _config["JWT:Audience"],
-                claims: claims,
+                claims,
                 expires: DateTime.Now.AddMonths(2),
                 signingCredentials: creds
             );

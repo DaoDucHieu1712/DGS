@@ -1,4 +1,4 @@
-using DGS.API.Services;
+﻿using DGS.API.Services;
 using DGS.BusinessObjects;
 using DGS.BusinessObjects.Entities;
 using DGS.DataAccess.impls;
@@ -17,13 +17,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
-builder.Services.AddCors();
-builder.Services.AddAutoMapper(typeof(DGS.BusinessObjects.AutoMapper.ApplicationMapper).Assembly);
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-
-#region database
+#region db
 
 builder.Services.AddDbContext<ApplicationDbContext>(option =>
 {
@@ -36,11 +30,21 @@ builder.Services.AddIdentity<ApplicationUser, ApplicationRole>()
                 .AddDefaultTokenProviders();
 #endregion
 
+builder.Services.AddControllers();
+builder.Services.AddCors();
+builder.Services.AddAutoMapper(typeof(DGS.BusinessObjects.AutoMapper.ApplicationMapper).Assembly);
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 #region auth
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+})
     .AddJwtBearer(options =>
     {
         options.SaveToken = true;
+        options.RequireHttpsMetadata = false;
         options.TokenValidationParameters = new TokenValidationParameters
         {
             ValidateIssuer = true,
@@ -55,10 +59,18 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     }
 );
 
-builder.Services.AddAuthorization();
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("Bearer", policy =>  // thêm một cái chính sách
+    {
+        policy.AddAuthenticationSchemes("Bearer");
+        policy.RequireAuthenticatedUser();
+    });
+});
 
 #endregion
 
+builder.Services.AddEndpointsApiExplorer();
 #region swagger
 builder.Services.AddSwaggerGen(option =>
 {
@@ -113,6 +125,9 @@ builder.Services.AddTransient<IOrderDetailRepository, OrderDetailRepository>();
 
 
 var app = builder.Build();
+
+app.UseSwagger();
+app.UseSwaggerUI();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

@@ -22,12 +22,10 @@ namespace DGS.API.Controllers
         {
             try
             {
-              var result = await services.SignUp(request);
-                if(result.Succeeded)
-                {
-                    return Ok(result.Succeeded);
-                }
-                return Unauthorized();
+                var _user = services.GetUserByEmail(request.Email);
+                if (_user != null) return StatusCode(500,"Email is Exist !!!!");
+                await services.SignUp(request);
+                return NoContent();
             }
             catch (ApplicationException ae)
             {
@@ -44,7 +42,9 @@ namespace DGS.API.Controllers
         {
             try
             {
-                return Ok(await services.SignIn(request));
+                var rs = await services.SignIn(request);
+                if (rs == null) return StatusCode(500, "username or password wrong !!!");
+                return Ok(rs);
             }
             catch (ApplicationException ae)
             {
@@ -62,6 +62,24 @@ namespace DGS.API.Controllers
             try
             {
                 return Ok();
+            }
+            catch (ApplicationException ae)
+            {
+                return StatusCode(400, ae.Message);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpGet("FindByEmail")]
+        public async Task<IActionResult> FindUserByEmail(string email)
+        {
+            try
+            {
+                var user = await services.GetUserByEmail(email);
+                return Ok(user);
             }
             catch (ApplicationException ae)
             {

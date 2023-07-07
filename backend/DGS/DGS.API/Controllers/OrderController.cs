@@ -38,12 +38,12 @@ namespace DGS.API.Controllers
             }
         }
 
-        [HttpGet("GetByUser/{id}")]
-        public async Task<IActionResult> FindByUser(string id)
+        [HttpGet("MyOrder/{email}")]
+        public async Task<IActionResult> FindByUser(string email)
         {
             try
             {
-                return Ok();
+                return Ok(await orderRepository.FindOrdersByEmail(email));
             }
             catch (ApplicationException ae)
             {
@@ -73,7 +73,7 @@ namespace DGS.API.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpPost("CreateAndGet")]
         public async Task<IActionResult> CreateAndGet(OrderCreateUpdateDTO request)
         {
             try
@@ -108,10 +108,11 @@ namespace DGS.API.Controllers
         }
 
         [HttpPost("OrderDetail")]
-        public async Task<IActionResult> SaveOrderDetail(OrderDetailCreateUpdateDTO request)
+        public async Task<IActionResult> SaveOrderDetail(List<OrderDetailCreateUpdateDTO> request)
         {
             try
             {
+                await orderDetailRepository.AddRange(request);
                 return NoContent();
             }
             catch (ApplicationException ae)

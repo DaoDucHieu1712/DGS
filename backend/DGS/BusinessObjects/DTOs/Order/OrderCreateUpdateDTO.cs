@@ -13,7 +13,9 @@ namespace DGS.BusinessObjects.DTOs.Order
         [JsonIgnore]
         public int Id { get; set; }
         public string? UserId { get; set; }
-        public DateTime? CreateAt { get; set; }
+        public string? CustomerName { get; set; }
+        [JsonIgnore]
+        public DateTime? CreateAt { get; set; } = DateTime.Now;
         public decimal? TotalPrice { get; set; }
         public string? ShipAddress { get; set; }
         public OrderStatus Status { get; set; }

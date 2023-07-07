@@ -6,7 +6,7 @@ const ProductService = {
     const url = "/Product";
     return axiosConfig.get(url);
   },
-  getSingle(id: string): Promise<Product> {
+  getSingle(id: string | number): Promise<Product> {
     const url = `/Product/${id}`;
     return axiosConfig.get(url);
   },
@@ -25,6 +25,17 @@ const ProductService = {
   filter(data: any): Promise<Product[]> {
     const url = "/Product/Filter";
     return axiosConfig.post(url, data);
+  },
+  filterWithReactQuery(context: any): Promise<any> {
+    const url =
+      "/Product/Filter?" +
+      `pageIndex=${context.queryKey[1]}&` +
+      `Name=${context.queryKey[2]}&` +
+      `ToPrice=${context.queryKey[3]}&` +
+      `FromPrice=${context.queryKey[4]}&` +
+      `CategoryId=${context.queryKey[5]}&` +
+      `sortType=${context.queryKey[6]}`;
+    return axiosConfig.get(url);
   },
   search(data: any): Promise<Product[]> {
     const url =

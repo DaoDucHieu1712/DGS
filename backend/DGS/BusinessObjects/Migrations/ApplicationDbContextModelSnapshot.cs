@@ -144,6 +144,9 @@ namespace DGS.BusinessObjects.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("CustomerName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -563,24 +566,24 @@ namespace DGS.BusinessObjects.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "3a936d63-5f09-4b59-b888-af2e4dd4180e",
-                            ConcurrencyStamp = "d97aa97a-944e-4971-af7d-6b83e157d3b9",
+                            Id = "4262d1d3-5d20-4cba-8898-60e0bcbbd3ab",
+                            ConcurrencyStamp = "55f1c780-ae26-40bf-aa84-57ceac0bcc0a",
                             Name = "Admin",
                             NormalizedName = "ADMIN",
                             Description = "Admin"
                         },
                         new
                         {
-                            Id = "35500caf-5b50-4577-b829-206b53c7e1ea",
-                            ConcurrencyStamp = "8fff783f-1655-4451-9307-1f55421ece9a",
+                            Id = "8466368b-df10-43e1-8411-e4fd4e679ab8",
+                            ConcurrencyStamp = "b89d2cc4-87e8-42cd-9627-eb4558439eef",
                             Name = "Staff",
                             NormalizedName = "STAFF",
                             Description = "Staff"
                         },
                         new
                         {
-                            Id = "9969ca02-d2ec-4eb4-b872-ad3f003e03d0",
-                            ConcurrencyStamp = "3f8f0cb8-2352-4671-99d9-76f7baa6abea",
+                            Id = "7c267efa-8975-47c9-bd21-dc8c714b8f12",
+                            ConcurrencyStamp = "e044d34f-b3ae-4659-a6e5-10ef5da58d05",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER",
                             Description = "Customer"

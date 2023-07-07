@@ -1,11 +1,11 @@
 "use client";
-
 import { Inter } from "next/font/google";
 import ReactQueryProvider from "./ReactQueryProvider";
 import "./styles/globals.scss";
-
 import { ThemeProvider } from "@material-tailwind/react";
 import { ReduxProviders } from "./ReduxProvider";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -25,6 +25,7 @@ export default function RootLayout({
           <html lang="en">
             <body className={inter.className}>{children}</body>
           </html>
+          {/* <ToastContainer></ToastContainer> */}
         </ThemeProvider>
       </ReactQueryProvider>
     </ReduxProviders>

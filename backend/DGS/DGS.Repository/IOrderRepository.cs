@@ -13,5 +13,6 @@ namespace DGS.Repository
         Task<OrderDTO> FindByUser(string id);
         Task UpdateStatus(string id, OrderStatus status);
         Task<OrderDTO> CreateAndGet(OrderCreateUpdateDTO request);
+        Task<List<OrderDTO>> FindOrdersByEmail(string email);
     }
 }

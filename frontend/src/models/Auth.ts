@@ -4,9 +4,15 @@ export interface Login {
 }
 
 export interface User {
-  id: string;
-  displayName: string;
+  email: string;
   roles: string[];
   accessToken: string;
-  refreshToken: string;
+}
+
+export interface ApplicationUser {
+  id: string;
+  displayName: string;
+  gender: boolean;
+  birthDay: Date;
+  imageUrl: string;
 }

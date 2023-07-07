@@ -1,4 +1,4 @@
-import { Login, User } from "@/models/Auth";
+import { ApplicationUser, Login, User } from "@/models/Auth";
 import axiosConfig from "./axiosConfig";
 
 const AuthServices = {
@@ -9,6 +9,10 @@ const AuthServices = {
   register(data: any): Promise<void> {
     const url = "/Auth/Register";
     return axiosConfig.post(url, data);
+  },
+  findbyEmail(email: string | undefined): Promise<ApplicationUser> {
+    const url = `/Auth/FindByEmail?email=${email}`;
+    return axiosConfig.get(url);
   },
 };
 

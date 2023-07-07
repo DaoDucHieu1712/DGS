@@ -2,10 +2,9 @@
 import ProductItiem from "@/components/product/ProductItiem";
 import CategoryService from "@/services/categoryService";
 import ProductService from "@/services/productService";
-import { Button, Input, Option, Select } from "@material-tailwind/react";
+import { Button, Input } from "@material-tailwind/react";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
-import type { SelectOptionProps } from "@material-tailwind/react";
 
 const Shop = () => {
   const [name, setName] = useState<string>("");

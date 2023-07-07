@@ -2,10 +2,46 @@
 import CartItem from "@/components/cart/CartItem";
 import { cartSelector } from "@/features/cartSlice";
 import { useAppSelector } from "@/redux/hooks";
-import { Button } from "@material-tailwind/react";
+import AuthServices from "@/services/authService";
+import OrderServices from "@/services/orderService";
+import { Button, Textarea } from "@material-tailwind/react";
+import { getCookie } from "cookies-next";
+import { useState } from "react";
 
 const Cart = () => {
-  const { cart, totalPrice, totalQuantity } = useAppSelector(cartSelector);
+  const [address, setAddress] = useState<string>("");
+  const { cart, totalPrice } = useAppSelector(cartSelector);
+
+  const handleCheckout = async () => {
+    var email = getCookie("email")?.toString();
+    var user = await AuthServices.findbyEmail(email);
+
+    var NewOrder = await OrderServices.createAndGet({
+      userId: user.id,
+      customerName: user.displayName,
+      totalPrice: totalPrice,
+      shipAddress: address,
+      status: 1,
+    });
+
+    var orderdetails = cart.map((item) => {
+      return {
+        orderId: NewOrder.id,
+        productId: item.productId,
+        size: item.size,
+        unitPrice: item.price,
+        quantity: item.quantity,
+      };
+    });
+
+    await OrderServices.AddOrderDetail(orderdetails)
+      .then((res) => {
+        window.location.href = "/";
+      })
+      .catch((error) => {
+        console.log("Loi roi anh ban oi");
+      });
+  };
 
   return (
     <div className="container mx-auto grid grid-cols-3 gap-x-12">
@@ -15,11 +51,19 @@ const Cart = () => {
         {cart.length === 0 ? (
           <p>Your Bag is Empty !!!!!</p>
         ) : (
-          <div className="flex flex-col gap-y-5 cart mt-8 border-1 rounded-md border-gray-400">
-            {cart.map((item) => {
-              return <CartItem key={item.productId} item={item}></CartItem>;
-            })}
-          </div>
+          <>
+            <div className="flex flex-col gap-y-5 cart mt-8 border-1 rounded-md border-gray-400">
+              {cart.map((item) => {
+                return <CartItem key={item.productId} item={item}></CartItem>;
+              })}
+            </div>
+            <div className="mt-12">
+              <Textarea
+                label="Ship Adress"
+                onChange={(e) => setAddress(e.target.value)}
+              />
+            </div>
+          </>
         )}
       </div>
       <div className="flex flex-col gap-y-4">
@@ -41,7 +85,13 @@ const Cart = () => {
           </li>
         </ul>
         <div className="mt-3">
-          <Button size="md" color="red" className="w-full">
+          <Button
+            size="md"
+            color="red"
+            className="w-full"
+            disabled={address.length === 0}
+            onClick={handleCheckout}
+          >
             Checkout
           </Button>
         </div>

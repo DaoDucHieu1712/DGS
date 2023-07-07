@@ -1,5 +1,6 @@
 ﻿using DGS.BusinessObjects.DTOs.Product;
 using DGS.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -124,8 +125,8 @@ namespace DGS.API.Controllers
             }
         }
 
-        [HttpPost("Filter")]
-        public async Task<IActionResult> Filter(ProductFilterDTO request)
+        [HttpGet("Filter")]
+        public async Task<IActionResult> Filter([FromQuery] ProductFilterDTO request)
         {
             try
             {

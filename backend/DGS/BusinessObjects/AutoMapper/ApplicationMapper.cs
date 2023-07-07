@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using DGS.BusinessObjects.DTOs.Auth;
 using DGS.BusinessObjects.DTOs.Category;
 using DGS.BusinessObjects.DTOs.Order;
 using DGS.BusinessObjects.DTOs.OrderDetail;
@@ -30,6 +31,8 @@ namespace DGS.BusinessObjects.AutoMapper
             CreateMap<OrderDetail, OrderDetailCreateUpdateDTO>().ReverseMap();
 
             CreateMap<Size, SizeDTO>().ReverseMap();
+
+            CreateMap<ApplicationUser, UserDTO>().ReverseMap();
         }
     }
 }

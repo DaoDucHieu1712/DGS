@@ -37,7 +37,7 @@ namespace DGS.Repository.Impls
 
         public async Task<ProductFilterAndPagingDTO> Filter(ProductFilterDTO request)
         {
-            var queryProduct =  await _productDAO.FindAll(x => x.Category).ToListAsync();
+            var queryProduct =  await _productDAO.FindAll(x => x.Category).OrderByDescending(x => x.Id).ToListAsync();
 
             //Sort
             if (request.sortType != null)
@@ -84,7 +84,7 @@ namespace DGS.Repository.Impls
             }
 
             //Paging
-            int pageSize = 20;
+            int pageSize = 6;
             List<ProductDTO> _products = _mapper.Map<List<ProductDTO>>(queryProduct);
             List<ProductDTO> products = await PagedList<ProductDTO>.CreateAsync(_products, request.pageIndex ?? 1, pageSize);
             var TotalPages = (int)Math.Ceiling(_products.Count / (double)pageSize);
@@ -115,7 +115,7 @@ namespace DGS.Repository.Impls
 
         public async Task<List<ProductDTO>> Search(ProductFilterDTO request)
         {
-            var queryProduct = await _productDAO.FindAll(x => x.Category).ToListAsync(); ;
+            var queryProduct = await _productDAO.FindAll(x => x.Category).OrderByDescending(x => x.Id).ToListAsync();
 
             //Sort
             if (request.sortType != null)

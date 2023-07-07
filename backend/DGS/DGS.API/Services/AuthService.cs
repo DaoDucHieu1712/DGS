@@ -1,4 +1,5 @@
-﻿using DGS.BusinessObjects;
+﻿using AutoMapper;
+using DGS.BusinessObjects;
 using DGS.BusinessObjects.DTOs.Auth;
 using DGS.BusinessObjects.Entities;
 using Microsoft.AspNetCore.Identity;
@@ -12,15 +13,17 @@ namespace DGS.API.Services
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly TokenService _tokenService;
         private readonly ApplicationDbContext _context;
+        private readonly IMapper _mapper;
 
-        public AuthService(UserManager<ApplicationUser> userManager, TokenService tokenService, ApplicationDbContext context)
+        public AuthService(UserManager<ApplicationUser> userManager, TokenService tokenService, ApplicationDbContext context, IMapper mapper)
         {
             _userManager = userManager;
             _tokenService = tokenService;
             _context = context;
+            _mapper = mapper;
         }
 
-        public async Task<IdentityResult> SignUp(RegisterDTO request)
+        public async Task SignUp(RegisterDTO request)
         {
             var NewUser = new ApplicationUser
             {
@@ -34,10 +37,13 @@ namespace DGS.API.Services
             var result = await _userManager.CreateAsync(NewUser, request.Password);
             if (!result.Succeeded)
             {
-                throw new Exception();
+                throw new Exception("Register Failed !!");
             }
-            await _userManager.AddToRoleAsync(NewUser, "Customer");
-            return result;
+            var roleRs =  await _userManager.AddToRoleAsync(NewUser, "Customer");
+            if(!roleRs.Succeeded)
+            {
+                throw new Exception("Not Add To Role");
+            }
         }
 
         public async Task<UserClientDTO> SignIn(SignInDTO request)
@@ -46,18 +52,23 @@ namespace DGS.API.Services
 
             if (user == null || !await _userManager.CheckPasswordAsync(user, request.Password))
             {
-                throw new Exception("User name or password wrong !!!");
+                return null;
             }
 
-            string jti = Guid.NewGuid().ToString();
+            var roles = await _userManager.GetRolesAsync(user);
 
             return new UserClientDTO
             {
                 Email = user.Email,
-                AccessToken = await _tokenService.GenerateToken(user, jti),
-                RefreshToken = await _tokenService.GenerateRefreshToken(jti, user.Id)
+                Roles = roles,
+                AccessToken = await _tokenService.GenerateToken(user)
             };
         }
-       
+
+        public async Task<UserDTO> GetUserByEmail(string email)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+            return _mapper.Map<UserDTO>(user);
+        }
     }
 }

@@ -53,6 +53,11 @@ namespace DGS.Repository.Impls
             return _mapper.Map<List<OrderDTO>>(await _orderDAO.GetList());
         }
 
+        public async Task<List<OrderDTO>> FindOrdersByEmail(string email)
+        {
+           return _mapper.Map<List<OrderDTO>>(await _orderDAO.FindAll(e => e.ApplicationUser).Where(x => x.ApplicationUser.Email == email).ToListAsync());
+        }
+
         public async Task Remove(int id)
         {
             await _orderDAO.Remove(id);

@@ -11,7 +11,6 @@ namespace DGS.Repository
 {
     public interface IOrderDetailRepository : IRepository<OrderDetailDTO, OrderCreateUpdateDTO, int>
     {
-        
-
+        Task AddRange(List<OrderDetailCreateUpdateDTO> request);
     }
 }
