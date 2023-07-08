@@ -12,7 +12,7 @@ namespace DGS.BusinessObjects.DTOs.Order
         public int Id { get; set; }
         public string? UserId { get; set; }
         public string? CustomerName { get; set; }
-        public DateTime? CreateAt { get; set; }
+        public DateTime? CreatedAt { get; set; }
         public decimal? TotalPrice { get; set; }
         public string? ShipAddress { get; set; }
         public OrderStatus Status { get; set; }

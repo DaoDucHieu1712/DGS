@@ -22,8 +22,7 @@ namespace DGS.API.Controllers
         {
             try
             {
-                var _user = services.GetUserByEmail(request.Email);
-                if (_user != null) return StatusCode(500,"Email is Exist !!!!");
+                if (request.Password != request.ConfirmPassword) return StatusCode(500, "Confirm password don't match !!!");
                 await services.SignUp(request);
                 return NoContent();
             }
@@ -80,6 +79,60 @@ namespace DGS.API.Controllers
             {
                 var user = await services.GetUserByEmail(email);
                 return Ok(user);
+            }
+            catch (ApplicationException ae)
+            {
+                return StatusCode(400, ae.Message);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpPost("ChangePassword")]
+        public async Task<IActionResult> ChangePassword(ChangePasswordDTO request)
+        {
+            try
+            {
+                var isSuccess = await services.ChangePassword(request);
+                return Ok(isSuccess);
+            }
+            catch (ApplicationException ae)
+            {
+                return StatusCode(400, ae.Message);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpGet("User")]
+        public async Task<IActionResult> GetAllUser()
+        {
+
+            try
+            {
+                return Ok(await services.GetUsers());
+            }
+            catch (ApplicationException ae)
+            {
+                return StatusCode(400, ae.Message);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpPost("ProfilePost")]
+        public async Task<IActionResult> Profile(UserDTO request)
+        {
+            try
+            {
+                await services.ProfileSave(request);
+                return NoContent();
             }
             catch (ApplicationException ae)
             {

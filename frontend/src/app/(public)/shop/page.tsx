@@ -36,7 +36,7 @@ const Shop = () => {
   };
 
   return (
-    <>
+    <div className="container mx-auto">
       <div className="flex items-center justify-center gap-x-3">
         <div className="form-group">
           <select
@@ -101,7 +101,7 @@ const Shop = () => {
           return <ProductItiem key={item.id} item={item}></ProductItiem>;
         })}
       </div>
-    </>
+    </div>
   );
 };
 

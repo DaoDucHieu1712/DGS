@@ -13,6 +13,5 @@ namespace DGS.Repository
         Task Add(H entity);
         Task Update(H entity);
         Task Remove(K id);
-
     }
 }

@@ -45,11 +45,13 @@ const Register = () => {
       displayName: data.displayName,
       imageURL: "",
       gender: data.gender,
-      birtday: data.birthDay,
+      birthDay: data.birthDay.toJSON(),
       email: data.email,
       password: data.password,
       confirmPassword: data.confirmPassword,
     };
+
+    console.log(NewUser);
 
     await AuthServices.register(NewUser)
       .then((res) => {

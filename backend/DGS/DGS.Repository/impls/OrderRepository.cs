@@ -1,8 +1,11 @@
 ﻿using AutoMapper;
+using DGS.BusinessObjects.Common;
 using DGS.BusinessObjects.DTOs.Order;
+using DGS.BusinessObjects.DTOs.Product;
 using DGS.BusinessObjects.Entities;
 using DGS.BusinessObjects.Enums;
 using DGS.DataAccess.interfaces;
+using DGS.Repository.Helper;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -45,7 +48,9 @@ namespace DGS.Repository.Impls
 
         public async Task<OrderDTO> FindByUser(string id)
         {
-            return _mapper.Map<OrderDTO>(await _orderDAO.FindAll(e => e.UserId == id).ToListAsync());
+            return _mapper.Map<OrderDTO>(await _orderDAO.FindAll(e => e.UserId == id).OrderByDescending(x => x.CreatedAt).ToListAsync());
+            
+        
         }
 
         public async Task<List<OrderDTO>> GetAll()
@@ -53,9 +58,48 @@ namespace DGS.Repository.Impls
             return _mapper.Map<List<OrderDTO>>(await _orderDAO.GetList());
         }
 
-        public async Task<List<OrderDTO>> FindOrdersByEmail(string email)
+        public async Task<EntityFilter<OrderDTO>> FindOrdersByEmail(string email , OrderFilterDTO request)
         {
-           return _mapper.Map<List<OrderDTO>>(await _orderDAO.FindAll(e => e.ApplicationUser).Where(x => x.ApplicationUser.Email == email).ToListAsync());
+          var queryOrders = await _orderDAO.FindAll(e => e.ApplicationUser).Where(x => x.ApplicationUser.Email == email).OrderByDescending(x => x.CreatedAt).ToListAsync();
+            
+            if (request.sortType != null)
+            {
+                switch (request.sortType)
+                {
+                    case "createdat-asc":
+                        queryOrders = queryOrders.OrderBy(x => x.CreatedAt).ToList();
+                        break;
+                    case "createdat-desc":
+                        queryOrders = queryOrders.OrderByDescending(x => x.CreatedAt).ToList();
+                        break;
+                    default:
+                        queryOrders = queryOrders.OrderBy(x => x.CreatedAt).ToList();
+                        break;
+                }
+            }
+
+            if (request.StartDate != null)
+            {
+                queryOrders = queryOrders.Where(x => x.CreatedAt >= request.StartDate).ToList();
+            }
+
+            if (request.EndDate != null)
+            {
+                queryOrders = queryOrders.Where(x => x.CreatedAt <= request.EndDate).ToList();
+            }
+
+            int pageSize = Constants.Contants.PAGE_SIZE;
+            List<OrderDTO> _orders = _mapper.Map<List<OrderDTO>>(queryOrders);
+            List<OrderDTO> orders = await PagedList<OrderDTO>.CreateAsync(_orders, request.PageIndex ?? 1, pageSize);
+            var TotalPages = (int)Math.Ceiling(_orders.Count / (double)pageSize);
+
+            return new EntityFilter<OrderDTO>
+            {
+                list = orders,
+                pageIndex = request.PageIndex ?? 1,
+                total = TotalPages,
+            };
+
         }
 
         public async Task Remove(int id)
@@ -68,11 +112,55 @@ namespace DGS.Repository.Impls
             await _orderDAO.Update(_mapper.Map<Order>(entity), "CreatedAt");
         }
 
-        public async Task UpdateStatus(string id, OrderStatus status)
+        public async Task UpdateStatus(int id, OrderStatus status)
         {
-           var order = await _orderDAO.FindSingle(e => e.UserId == id);
+           var order = await _orderDAO.FindSingle(e => e.Id == id);
            order.Status = status;
            await _orderDAO.Update(order, "CreatedAt");
+        }
+
+        public async Task<EntityFilter<OrderDTO>> Filter(OrderFilterDTO request)
+        {
+            var queryOrders = await _orderDAO.FindAll().OrderByDescending(x => x.CreatedAt).ToListAsync();
+            //Sort
+            if (request.sortType != null)
+            {
+                switch (request.sortType)
+                {
+                    case "createdat-asc":
+                        queryOrders = queryOrders.OrderBy(x => x.CreatedAt).ToList();
+                        break;
+                    case "createdat-desc":
+                        queryOrders = queryOrders.OrderByDescending(x => x.CreatedAt).ToList();
+                        break;
+                    default:
+                        queryOrders = queryOrders.OrderBy(x => x.CreatedAt).ToList();
+                        break;
+                }
+            }
+
+            if(request.StartDate != null)
+            {
+                queryOrders = queryOrders.Where(x => x.CreatedAt >= request.StartDate).ToList();
+            }
+
+            if (request.EndDate != null)
+            {
+                queryOrders = queryOrders.Where(x => x.CreatedAt <= request.EndDate).ToList();
+            }
+
+            int pageSize = Constants.Contants.PAGE_SIZE;
+            List<OrderDTO> _orders = _mapper.Map<List<OrderDTO>>(queryOrders);
+            List<OrderDTO> orders = await PagedList<OrderDTO>.CreateAsync(_orders, request.PageIndex ?? 1, pageSize);
+            var TotalPages = (int)Math.Ceiling(_orders.Count / (double)pageSize);
+
+            return new EntityFilter<OrderDTO>
+            {
+                list = orders,
+                pageIndex = request.PageIndex ?? 1,
+                total = TotalPages,
+            };
+
         }
     }
 }

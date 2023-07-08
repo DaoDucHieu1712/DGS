@@ -84,7 +84,7 @@ namespace DGS.Repository.Impls
             }
 
             //Paging
-            int pageSize = 6;
+            int pageSize = Constants.Contants.PAGE_SIZE;
             List<ProductDTO> _products = _mapper.Map<List<ProductDTO>>(queryProduct);
             List<ProductDTO> products = await PagedList<ProductDTO>.CreateAsync(_products, request.pageIndex ?? 1, pageSize);
             var TotalPages = (int)Math.Ceiling(_products.Count / (double)pageSize);
