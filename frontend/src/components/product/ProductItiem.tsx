@@ -28,7 +28,7 @@ const ProductItiem = ({ item }: ProductItemProps) => {
         </CardHeader>
         <CardBody>
           <div className="flex items-center justify-between mb-2">
-            <Typography color="blue-gray" className="font-medium">
+            <Typography color="blue-gray" className="font-semibold">
               {item.name}
             </Typography>
             <Typography color="blue-gray" className="font-medium">

@@ -14,6 +14,18 @@ const AuthServices = {
     const url = `/Auth/FindByEmail?email=${email}`;
     return axiosConfig.get(url);
   },
+  changePassword(data: any): Promise<boolean> {
+    const url = `/Auth/ChangePassword`;
+    return axiosConfig.post(url, data);
+  },
+  getUsers(): Promise<any> {
+    const url = "/Auth/User";
+    return axiosConfig.get(url);
+  },
+  getProfile(data: any): Promise<boolean> {
+    const url = "/Auth/ProfilePost";
+    return axiosConfig.post(url, data);
+  },
 };
 
 export default AuthServices;

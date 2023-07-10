@@ -143,5 +143,20 @@ namespace DGS.API.Controllers
             }
         }
         
+        public async Task<IActionResult> GetOrderDetail()
+        {
+            try
+            {
+                return Ok(await orderRepository.Filter(request));
+            }
+            catch (ApplicationException ae)
+            {
+                return StatusCode(400, ae.Message);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
     }
 }

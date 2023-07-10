@@ -3,6 +3,7 @@ using DGS.BusinessObjects.DTOs.Order;
 using DGS.BusinessObjects.DTOs.OrderDetail;
 using DGS.BusinessObjects.Entities;
 using DGS.DataAccess.interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,6 +36,11 @@ namespace DGS.Repository.Impls
         public async Task<OrderDetailDTO> FindById(int id)
         {
             return _mapper.Map<OrderDetailDTO>(await _orderDetailDAO.FindSingle(e => e.Id == id));
+        }
+
+        public async Task<List<OrderDetailDTO>> FindByOrder(int id)
+        {
+            return _mapper.Map<List<OrderDetailDTO>>(await _orderDetailDAO.FindAll(e => e.OrderId == id, e => e.Order).ToListAsync());
         }
 
         public async Task<List<OrderDetailDTO>> GetAll()

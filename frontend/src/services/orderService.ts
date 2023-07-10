@@ -14,13 +14,28 @@ const OrderServices = {
     const url = "/Order/OrderDetail";
     return axiosConfig.post(url, data);
   },
-  GetMyOrder(id: string): Promise<Order[]> {
-    const url = `/Order/GetByUser/${id}`;
-    return axiosConfig.get(url);
-  },
   Update(id: string, status: string): Promise<void> {
     const url = `/Order/${id}?status=${status}`;
     return axiosConfig.put(url);
+  },
+  Filter(context: any): Promise<any> {
+    const url =
+      `/Order/Filter?` +
+      `PageIndex=${context.queryKey[1]}&` +
+      `StartDate=${context.queryKey[2]}&` +
+      `EndDate=${context.queryKey[3]}&` +
+      `sortType=${context.queryKey[4]}&`;
+    return axiosConfig.get(url);
+  },
+  getMyOrder(context: any): Promise<any> {
+    const url =
+      "/Order/MyOrder/" +
+      `${context.queryKey[1]}?` +
+      `PageIndex=${context.queryKey[2]}` +
+      `StartDate=${context.queryKey[3]}` +
+      `EndDate=${context.queryKey[4]}` +
+      `sortType=${context.queryKey[5]}`;
+    return axiosConfig.get(url);
   },
 };
 

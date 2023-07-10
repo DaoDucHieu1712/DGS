@@ -1,5 +1,6 @@
 ﻿using DGS.BusinessObjects.Common;
 using DGS.BusinessObjects.DTOs.Order;
+using DGS.BusinessObjects.DTOs.OrderDetail;
 using DGS.BusinessObjects.Enums;
 using System;
 using System.Collections.Generic;
@@ -16,5 +17,6 @@ namespace DGS.Repository
         Task<OrderDTO> CreateAndGet(OrderCreateUpdateDTO request);
         Task<EntityFilter<OrderDTO>> FindOrdersByEmail(string email, OrderFilterDTO request);
         Task<EntityFilter<OrderDTO>> Filter(OrderFilterDTO request);
+
     }
 }

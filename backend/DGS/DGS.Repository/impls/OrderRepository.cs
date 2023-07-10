@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using DGS.BusinessObjects.Common;
 using DGS.BusinessObjects.DTOs.Order;
+using DGS.BusinessObjects.DTOs.OrderDetail;
 using DGS.BusinessObjects.DTOs.Product;
 using DGS.BusinessObjects.Entities;
 using DGS.BusinessObjects.Enums;
@@ -162,5 +163,7 @@ namespace DGS.Repository.Impls
             };
 
         }
+
+        
     }
 }

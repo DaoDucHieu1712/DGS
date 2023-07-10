@@ -96,7 +96,7 @@ const Shop = () => {
           </Button>
         </div>
       </div>
-      <div className="my-6 grid grid-cols-5 gap-3">
+      <div className="my-6 grid grid-cols-4 gap-3">
         {productsQuery.data?.map((item) => {
           return <ProductItiem key={item.id} item={item}></ProductItiem>;
         })}
