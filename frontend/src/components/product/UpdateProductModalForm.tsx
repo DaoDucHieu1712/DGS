@@ -15,6 +15,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
+import ChangeImage from "../upload/ChangeImage";
 
 const schema = yup
   .object({
@@ -61,6 +62,7 @@ const UpdateProductModalForm = ({
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<FormData>({
     resolver: yupResolver(schema),
@@ -98,12 +100,13 @@ const UpdateProductModalForm = ({
               defaultValue={product?.name}
               {...register("name")}
             />
-            <Input
-              size="md"
-              label="Image Url"
-              defaultValue={product?.image}
-              {...register("image")}
-            />
+            <div className="changeImage">
+              <ChangeImage
+                name="image"
+                onChange={setValue}
+                urlImage={product?.image}
+              ></ChangeImage>
+            </div>
             <Textarea
               label="Description"
               {...register("description")}

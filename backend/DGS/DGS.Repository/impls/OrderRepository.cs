@@ -50,8 +50,6 @@ namespace DGS.Repository.Impls
         public async Task<OrderDTO> FindByUser(string id)
         {
             return _mapper.Map<OrderDTO>(await _orderDAO.FindAll(e => e.UserId == id).OrderByDescending(x => x.CreatedAt).ToListAsync());
-            
-        
         }
 
         public async Task<List<OrderDTO>> GetAll()
@@ -77,6 +75,17 @@ namespace DGS.Repository.Impls
                         queryOrders = queryOrders.OrderBy(x => x.CreatedAt).ToList();
                         break;
                 }
+            }
+
+            if (request.CustomerName != null)
+            {
+                queryOrders = queryOrders.Where(x => x.CustomerName.ToLower().Contains(request.CustomerName.ToLower())).ToList();
+            }
+
+            if (request.Status != null)
+            {
+                queryOrders = queryOrders.Where(x => x.Status == request.Status).ToList();
+
             }
 
             if (request.StartDate != null)
@@ -140,7 +149,18 @@ namespace DGS.Repository.Impls
                 }
             }
 
-            if(request.StartDate != null)
+            if(request.CustomerName != null)
+            {
+                queryOrders = queryOrders.Where(x => x.CustomerName.ToLower().Contains(request.CustomerName.ToLower())).ToList();
+            }
+
+            if(request.Status != null)
+            {
+                queryOrders = queryOrders.Where(x => x.Status == request.Status).ToList();
+
+            }
+
+            if (request.StartDate != null)
             {
                 queryOrders = queryOrders.Where(x => x.CreatedAt >= request.StartDate).ToList();
             }

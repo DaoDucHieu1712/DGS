@@ -8,9 +8,9 @@ namespace DGS.BusinessObjects.Enums
 {
     public enum OrderStatus
     {
-        Accept,
+        Wait,
         Pending,
-        Complete,
-        Reject
+        Reject,
+        Complete
     }
 }

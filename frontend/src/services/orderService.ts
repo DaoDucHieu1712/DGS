@@ -1,9 +1,14 @@
+import { getCookie } from "cookies-next";
 import { Order } from "./../models/Order";
 import axiosConfig from "./axiosConfig";
 
 const OrderServices = {
   getAll(): Promise<Order[]> {
     const url = "/Order";
+    return axiosConfig.get(url);
+  },
+  findById(id: string | number): Promise<Order> {
+    const url = `/Order/${id}`;
     return axiosConfig.get(url);
   },
   createAndGet(data: any): Promise<Order> {
@@ -24,17 +29,26 @@ const OrderServices = {
       `PageIndex=${context.queryKey[1]}&` +
       `StartDate=${context.queryKey[2]}&` +
       `EndDate=${context.queryKey[3]}&` +
-      `sortType=${context.queryKey[4]}&`;
+      `sortType=${context.queryKey[4]}&` +
+      `Status=${context.queryKey[5]}&` +
+      `CustomerName=${context.queryKey[6]}`;
     return axiosConfig.get(url);
   },
   getMyOrder(context: any): Promise<any> {
+    const email = getCookie("email")?.toString();
     const url =
       "/Order/MyOrder/" +
-      `${context.queryKey[1]}?` +
-      `PageIndex=${context.queryKey[2]}` +
-      `StartDate=${context.queryKey[3]}` +
-      `EndDate=${context.queryKey[4]}` +
-      `sortType=${context.queryKey[5]}`;
+      `${email}?` +
+      `PageIndex=${context.queryKey[1]}&` +
+      `StartDate=${context.queryKey[2]}&` +
+      `EndDate=${context.queryKey[3]}&` +
+      `sortType=${context.queryKey[4]}&` +
+      `Status=${context.queryKey[5]}&` +
+      `CustomerName=${context.queryKey[6]}`;
+    return axiosConfig.get(url);
+  },
+  getOrderDetail(id: any): Promise<any> {
+    const url = `/Order/OrderDetail/${id}`;
     return axiosConfig.get(url);
   },
 };

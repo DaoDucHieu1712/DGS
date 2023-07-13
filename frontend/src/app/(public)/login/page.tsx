@@ -59,7 +59,6 @@ const LoginPage = () => {
         }
       })
       .catch((error: Error) => {
-        // setErrorMessage("username or password is wrong !!!");
         const error_response = (error as any).response;
         setErrorMessage(error_response.data);
       });

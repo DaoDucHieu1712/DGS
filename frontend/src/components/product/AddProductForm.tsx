@@ -16,6 +16,7 @@ import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
+import UploadImage from "../upload/UploadImage";
 
 const schema = yup
   .object({
@@ -48,6 +49,7 @@ const AddProductForm = ({ reload }: AddProductFormProp) => {
     register,
     handleSubmit,
     reset,
+    setValue,
     formState: { errors },
   } = useForm<FormData>({
     resolver: yupResolver(schema),
@@ -87,7 +89,8 @@ const AddProductForm = ({ reload }: AddProductFormProp) => {
           <DialogBody divider className="flex flex-col gap-y-6 py-10">
             <p className="text-sm text-red-500 font-medium">{errMsg}</p>
             <Input size="md" label="Product Name" {...register("name")} />
-            <Input size="md" label="Image Url" {...register("image")} />
+            {/* <Input size="md" label="Image Url" {...register("image")} /> */}
+            <UploadImage name="image" onChange={setValue}></UploadImage>
             <Textarea label="Description" {...register("description")} />
             <Input
               size="md"

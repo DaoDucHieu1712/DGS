@@ -64,7 +64,14 @@ const Product = () => {
           </h1>
           <span className="text-sm">See infomation about all products</span>
         </div>
-        <div className="add">
+        <div className="">
+          <Button
+            color="blue"
+            size="md"
+            className="mr-3 lowercase font-semibold"
+          >
+            Export Excel
+          </Button>
           <AddProductForm reload={productsQuery.refetch}></AddProductForm>
         </div>
       </div>

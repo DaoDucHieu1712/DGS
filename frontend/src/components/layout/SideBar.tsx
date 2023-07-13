@@ -5,6 +5,7 @@ import Logo from "public/logo.png";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { deleteCookie } from "cookies-next";
 
 const navigation = [
   { href: "/dashboard", name: "dashboard" },
@@ -39,7 +40,17 @@ const SideBar = () => {
               </Link>
             );
           })}
-          <button className="hover:text-orange-400">sign out</button>
+          <button
+            className="hover:text-orange-400"
+            onClick={() => {
+              deleteCookie("email");
+              deleteCookie("token");
+              deleteCookie("roles");
+              window.location.href = "/login";
+            }}
+          >
+            sign out
+          </button>
         </div>
       </div>
     </>

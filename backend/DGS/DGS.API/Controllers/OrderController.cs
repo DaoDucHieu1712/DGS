@@ -38,6 +38,23 @@ namespace DGS.API.Controllers
             }
         }
 
+        [HttpGet("{id}")]
+        public async Task<IActionResult> FindById(int id)
+        {
+            try
+            {
+                return Ok(await orderRepository.FindById(id));
+            }
+            catch (ApplicationException ae)
+            {
+                return StatusCode(400, ae.Message);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
         [HttpGet("MyOrder/{email}")]
         public async Task<IActionResult> FindByUser(string email, [FromQuery] OrderFilterDTO request)
         {
@@ -142,12 +159,13 @@ namespace DGS.API.Controllers
                 return StatusCode(500, ex.Message);
             }
         }
-        
-        public async Task<IActionResult> GetOrderDetail()
+
+        [HttpGet("OrderDetail/{id}")]
+        public async Task<IActionResult> GetOrderDetail(int id)
         {
             try
             {
-                return Ok(await orderRepository.Filter(request));
+                return Ok(await orderDetailRepository.FindByOrder(id));
             }
             catch (ApplicationException ae)
             {

@@ -2,7 +2,7 @@
 import ProductItiem from "@/components/product/ProductItiem";
 import CategoryService from "@/services/categoryService";
 import ProductService from "@/services/productService";
-import { Button, Input } from "@material-tailwind/react";
+import { Input } from "@material-tailwind/react";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 
@@ -26,14 +26,6 @@ const Shop = () => {
       return CategoryService.getAll();
     },
   });
-
-  const onReset = () => {
-    setName("");
-    setToPrice("");
-    setFromPrice("");
-    setCategoryId("");
-    setSortType("");
-  };
 
   return (
     <div className="container mx-auto">
@@ -89,11 +81,6 @@ const Shop = () => {
             <option value="price-asc">Price - Low to High</option>
             <option value="price-desc">Price - High to Low</option>
           </select>
-        </div>
-        <div className="form-group flex gap-x-2">
-          <Button type="submit" color="red" onClick={onReset}>
-            Reset
-          </Button>
         </div>
       </div>
       <div className="my-6 grid grid-cols-4 gap-3">

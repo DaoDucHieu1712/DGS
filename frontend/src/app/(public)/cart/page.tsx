@@ -7,6 +7,7 @@ import OrderServices from "@/services/orderService";
 import { Button, Textarea } from "@material-tailwind/react";
 import { getCookie } from "cookies-next";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 const Cart = () => {
   const [address, setAddress] = useState<string>("");
@@ -21,7 +22,7 @@ const Cart = () => {
       customerName: user.displayName,
       totalPrice: totalPrice,
       shipAddress: address,
-      status: 1,
+      status: 0,
     });
 
     var orderdetails = cart.map((item) => {
@@ -37,6 +38,7 @@ const Cart = () => {
     await OrderServices.AddOrderDetail(orderdetails)
       .then((res) => {
         window.location.href = "/";
+        toast.success("order successful !!!");
       })
       .catch((error) => {
         console.log("Loi roi anh ban oi");

@@ -33,6 +33,7 @@ const ShopDetail = ({ params }: ShopDetailProps) => {
       size: size,
     };
     dispatch(cartActions.addToCart(CartItem));
+    setSize("");
   };
 
   return (

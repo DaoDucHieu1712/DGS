@@ -48,7 +48,7 @@ const Header = () => {
         </div>
         <div className="flex items-center justify-end gap-x-5 font-medium">
           {email ? (
-            <Link href="/my-profile" className="hover:text-orange-400">
+            <Link href="/profile" className="hover:text-orange-400">
               {email}
             </Link>
           ) : (
@@ -56,9 +56,6 @@ const Header = () => {
               login
             </Link>
           )}
-          <Link href="/myOrder" className="hover:text-orange-400">
-            orders
-          </Link>
           <Link href="/shop" className="hover:text-orange-400">
             wishlist
           </Link>

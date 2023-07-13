@@ -1,6 +1,7 @@
 ﻿using DGS.API.Services;
 using DGS.BusinessObjects.DTOs.Auth;
 using DGS.Repository.Impls;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 

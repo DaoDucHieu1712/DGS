@@ -22,7 +22,7 @@ const AuthServices = {
     const url = "/Auth/User";
     return axiosConfig.get(url);
   },
-  getProfile(data: any): Promise<boolean> {
+  ProfileSave(data: any): Promise<boolean> {
     const url = "/Auth/ProfilePost";
     return axiosConfig.post(url, data);
   },
