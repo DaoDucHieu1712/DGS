@@ -9,31 +9,13 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 
-const schema = yup
-  .object({
-    displayName: yup.string().required(),
-    gender: yup.boolean().required(),
-    birthDay: yup.date().required(),
-  })
-  .required();
-type FormData = yup.InferType<typeof schema>;
-
-interface ProfilePageProps {
-  params: { id: string };
-}
-
-const ProfilePage = ({ params }: ProfilePageProps) => {
+const ProfilePage = () => {
   const [user, setUser] = useState<ApplicationUser>();
   const [displayName, setDisplayName] = useState("");
   const [gender, setGender] = useState("");
   const [dob, setDob] = useState("");
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FormData>({
-    resolver: yupResolver(schema),
-  });
+  const [msg, setMsg] = useState("");
+  const [msgErr, setMsgErr] = useState<string>("");
 
   useEffect(() => {
     handleGetUser();
@@ -49,7 +31,7 @@ const ProfilePage = ({ params }: ProfilePageProps) => {
     });
   };
 
-  const onSubmitHandler = async (data: FormData) => {
+  const onSubmitHandler = async () => {
     const userUpdate = {
       id: user?.id,
       displayName: displayName,
@@ -58,7 +40,13 @@ const ProfilePage = ({ params }: ProfilePageProps) => {
       imageURL: "",
     };
 
-    await AuthServices.ProfileSave(userUpdate);
+    await AuthServices.ProfileSave(userUpdate)
+      .then((res) => {
+        setMsg("Update user successful !!!");
+      })
+      .catch((err: Error) => {
+        setMsgErr((err as any).response.data);
+      });
   };
 
   return (
@@ -78,16 +66,16 @@ const ProfilePage = ({ params }: ProfilePageProps) => {
               </div>
             </div>
             <div className="w-full p-4">
-              <form
-                onSubmit={handleSubmit(onSubmitHandler)}
-                className="flex justify-center items-center flex-col gap-y-4 w-full"
-              >
+              <div className="mb-3">
+                <p className="text-green-500">{msg}</p>
+                <p className="text-red-500">{msgErr}</p>
+              </div>
+              <div className="flex justify-center items-center flex-col gap-y-4 w-full">
                 <div className="form-group w-full">
                   <Input
                     size="md"
                     label="Display Name"
-                    defaultValue={displayName}
-                    {...register("displayName")}
+                    value={displayName}
                     onChange={(e) => setDisplayName(e.target.value)}
                   />
                 </div>
@@ -96,18 +84,16 @@ const ProfilePage = ({ params }: ProfilePageProps) => {
                     id="male"
                     label="Male"
                     color="orange"
-                    defaultValue="true"
+                    value="true"
                     checked={gender == "true" ? true : false}
-                    {...register("gender")}
                     onChange={(e) => setGender(e.target.value)}
                   />
                   <Radio
                     id="female"
                     label="Female"
                     color="orange"
-                    defaultValue="false"
+                    value="false"
                     checked={gender == "false" ? true : false}
-                    {...register("gender")}
                     onChange={(e) => setGender(e.target.value)}
                   />
                 </div>
@@ -116,8 +102,7 @@ const ProfilePage = ({ params }: ProfilePageProps) => {
                     size="md"
                     type="date"
                     label="Date of birth"
-                    defaultValue={dob}
-                    {...register("birthDay")}
+                    value={dob}
                     onChange={(e) => setDob(e.target.value)}
                   />
                 </div>
@@ -128,11 +113,12 @@ const ProfilePage = ({ params }: ProfilePageProps) => {
                     color="deep-orange"
                     type="submit"
                     fullWidth
+                    onClick={onSubmitHandler}
                   >
                     Save
                   </Button>
                 </div>
-              </form>
+              </div>
             </div>
           </div>
           <OtherInfomation></OtherInfomation>
