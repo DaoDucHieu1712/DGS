@@ -10,7 +10,7 @@ export async function middleware(req: NextRequest) {
       return NextResponse.redirect(new URL("/", req.url));
     }
   }
-  //Check if user logged in -> No: redirect to /login
+  //Check if user logged in -> No: redirect to /login ok
   if (
     req.nextUrl.pathname.startsWith("/cart") ||
     req.nextUrl.pathname.startsWith("/dashboard") ||
