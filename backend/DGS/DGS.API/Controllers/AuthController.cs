@@ -73,6 +73,7 @@ namespace DGS.API.Controllers
             }
         }
 
+        [Authorize]
         [HttpGet("FindByEmail")]
         public async Task<IActionResult> FindUserByEmail(string email)
         {
@@ -91,6 +92,7 @@ namespace DGS.API.Controllers
             }
         }
 
+        [Authorize]
         [HttpPost("ChangePassword")]
         public async Task<IActionResult> ChangePassword(ChangePasswordDTO request)
         {
@@ -109,6 +111,7 @@ namespace DGS.API.Controllers
             }
         }
 
+        [Authorize(Roles ="Admin")]
         [HttpGet("User")]
         public async Task<IActionResult> GetAllUser()
         {
@@ -127,6 +130,7 @@ namespace DGS.API.Controllers
             }
         }
 
+        [Authorize]
         [HttpPost("ProfilePost")]
         public async Task<IActionResult> Profile(UserDTO request)
         {

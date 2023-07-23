@@ -30,7 +30,7 @@ export async function middleware(req: NextRequest) {
     req.nextUrl.pathname.startsWith("/user") ||
     req.nextUrl.pathname.startsWith("/category")
   ) {
-    if (req.cookies.get("roles")?.value === "Admin") {
+    if (req.cookies.get("roles")?.value !== "Admin") {
       return NextResponse.redirect(new URL("/access-denied", req.url));
     }
   }

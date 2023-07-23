@@ -1,6 +1,7 @@
 ﻿using DGS.BusinessObjects.DTOs.Category;
 using DGS.Repository;
 using DGS.Repository.Impls;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,6 +17,7 @@ namespace DGS.API.Controllers
         {
             this.categoryRepository = categoryRepository;
         }
+
 
         [HttpGet]
         public async Task<IActionResult> FindAll()
@@ -51,6 +53,7 @@ namespace DGS.API.Controllers
             }
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> Add(CategoryCreateUpdateDTO request)
         {
@@ -69,6 +72,7 @@ namespace DGS.API.Controllers
             }
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(int id, CategoryCreateUpdateDTO request)
         {
@@ -88,6 +92,7 @@ namespace DGS.API.Controllers
             }
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {

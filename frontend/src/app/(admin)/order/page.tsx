@@ -8,6 +8,9 @@ import {
   Typography,
 } from "@material-tailwind/react";
 import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import { getCookie } from "cookies-next";
+import FileSaver from "file-saver";
 import Link from "next/link";
 import React, { useState } from "react";
 
@@ -43,6 +46,20 @@ const OrderPage = () => {
     },
   });
 
+  const handleExportExcel = () => {
+    const token = getCookie("token");
+    axios
+      .get(`https://localhost:7280/api/Order/Export`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        responseType: "blob",
+      })
+      .then((res) => {
+        FileSaver.saveAs(res.data, "order-list.xlsx");
+      });
+  };
+
   return (
     <>
       <div className="flex justify-between p-2">
@@ -51,6 +68,16 @@ const OrderPage = () => {
             order list
           </h1>
           <span className="text-sm">See infomation about all orders</span>
+        </div>
+        <div className="">
+          <Button
+            color="blue"
+            size="md"
+            className="mr-3 lowercase font-semibold"
+            onClick={handleExportExcel}
+          >
+            Export Excel
+          </Button>
         </div>
       </div>
       <div className="mt-5">

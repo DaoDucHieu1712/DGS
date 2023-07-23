@@ -12,6 +12,7 @@ namespace DGS.Repository
     {
         Task<ProductFilterAndPagingDTO> Filter(ProductFilterDTO request);
         Task<List<ProductDTO>> Search(ProductFilterDTO request);
-        Task AddMultiple(List<ProductCreateUpdateDTO> products);    
+        Task AddMultiple(List<ProductCreateUpdateDTO> products);
+        Task ExportExcel();
     }
 }

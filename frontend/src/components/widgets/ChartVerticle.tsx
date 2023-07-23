@@ -1,16 +1,17 @@
 "use client";
-import React from "react";
+import DashboardService from "@/services/dashboardService";
+import { faker } from "@faker-js/faker";
 import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
   BarElement,
+  CategoryScale,
+  Chart as ChartJS,
+  Legend,
+  LinearScale,
   Title,
   Tooltip,
-  Legend,
 } from "chart.js";
+import { useEffect, useState } from "react";
 import { Bar } from "react-chartjs-2";
-import { faker } from "@faker-js/faker";
 
 ChartJS.register(
   CategoryScale,
@@ -29,12 +30,12 @@ export const options = {
     },
     title: {
       display: true,
-      text: "Chart with 2022",
+      text: `Chart with ${Date.now()}`,
     },
   },
 };
 
-const labels = [
+export const labels = [
   "January",
   "February",
   "March",
@@ -49,24 +50,39 @@ const labels = [
   "December",
 ];
 
-export const data = {
-  labels,
-  datasets: [
-    {
-      label: "Price in",
-      data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
-      backgroundColor: "rgba(255, 99, 132, 0.5)",
-    },
-    {
-      label: "Price out",
-      data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
-      backgroundColor: "rgba(53, 162, 235, 0.5)",
-    },
-  ],
-};
-
 const ChartVerticle = () => {
-  return <Bar options={options} data={data} />;
+  const [dataset, setDataSet] = useState<any>({
+    labels,
+    datasets: [
+      {
+        label: "Price in",
+        data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
+        backgroundColor: "rgba(223, 110, 65, 0.973)",
+      },
+    ],
+  });
+
+  useEffect(() => {
+    handleChartApi();
+  }, []);
+
+  const handleChartApi = async () => {
+    await DashboardService.getChart().then((res) => {
+      const data = {
+        labels: res.map((item: any) => item.month.toString()),
+        datasets: [
+          {
+            label: "Total Price",
+            data: res.map((item: any) => item.totalPrice.toString()),
+            backgroundColor: "rgba(223, 110, 65, 0.973)",
+          },
+        ],
+      };
+      setDataSet(data);
+    });
+  };
+
+  return <Bar options={options} data={dataset} />;
 };
 
 export default ChartVerticle;

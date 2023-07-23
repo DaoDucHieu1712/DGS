@@ -40,7 +40,7 @@ namespace DGS.API.Services
 
             foreach (var role in roles)
             {
-                claims.Add(new Claim(ClaimTypes.Role, "Admin"));
+                claims.Add(new Claim(ClaimTypes.Role, role));
             }
 
 

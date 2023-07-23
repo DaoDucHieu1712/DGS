@@ -34,6 +34,8 @@ builder.Services.AddControllers();
 builder.Services.AddCors();
 builder.Services.AddAutoMapper(typeof(DGS.BusinessObjects.AutoMapper.ApplicationMapper).Assembly);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
+builder.Services.AddEndpointsApiExplorer();
 #region auth
 builder.Services.AddAuthentication(options =>
 {
@@ -70,7 +72,6 @@ builder.Services.AddAuthorization(options =>
 
 #endregion
 
-builder.Services.AddEndpointsApiExplorer();
 #region swagger
 builder.Services.AddSwaggerGen(option =>
 {
@@ -120,6 +121,7 @@ builder.Services.AddTransient<IProductRepository, ProductRepository>();
 builder.Services.AddTransient<ICategoryRepository, CategoryRepository>();
 builder.Services.AddTransient<IOrderRepository, OrderRepository>();
 builder.Services.AddTransient<IOrderDetailRepository, OrderDetailRepository>();
+builder.Services.AddTransient<IDashboardRepository, DashboardRepository>();
 
 #endregion
 

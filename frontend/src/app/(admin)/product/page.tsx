@@ -12,6 +12,9 @@ import {
 } from "@material-tailwind/react";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
+import * as FileSaver from "file-saver";
+import axios from "axios";
+import { getCookie } from "cookies-next";
 
 const TABLE_HEAD = ["Id", "Image", "Product", "Price", "Category", "Action"];
 
@@ -55,6 +58,20 @@ const Product = () => {
     }
   };
 
+  const handleExportExcel = () => {
+    const token = getCookie("token");
+    axios
+      .get(`https://localhost:7280/api/Product/Export`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        responseType: "blob",
+      })
+      .then((res) => {
+        FileSaver.saveAs(res.data, "product-list.xlsx");
+      });
+  };
+
   return (
     <>
       <div className="flex justify-between p-2">
@@ -69,6 +86,7 @@ const Product = () => {
             color="blue"
             size="md"
             className="mr-3 lowercase font-semibold"
+            onClick={handleExportExcel}
           >
             Export Excel
           </Button>
