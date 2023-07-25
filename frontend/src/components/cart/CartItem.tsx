@@ -13,15 +13,15 @@ const CartItem = ({ item }: CartItemProps) => {
   const dispatch = useAppDispatch();
 
   const handleDecrese = () => {
-    dispatch(cartActions.decreaseItemQuantity(item.productId));
+    dispatch(cartActions.decreaseItemQuantity(item));
   };
 
   const handleIncrement = () => {
-    dispatch(cartActions.increaseItemQuantity(item.productId));
+    dispatch(cartActions.increaseItemQuantity(item));
   };
 
   const handleRemoveCartItem = () => {
-    dispatch(cartActions.removeItem(item.productId));
+    dispatch(cartActions.removeItem(item));
   };
 
   return (

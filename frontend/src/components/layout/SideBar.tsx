@@ -6,6 +6,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { deleteCookie } from "cookies-next";
+import { cartActions } from "@/features/cartSlice";
+import { useAppDispatch } from "@/redux/hooks";
 
 const navigation = [
   { href: "/dashboard", name: "dashboard" },
@@ -16,6 +18,7 @@ const navigation = [
 
 const SideBar = () => {
   const pathname = usePathname();
+  const dispatch = useAppDispatch();
   return (
     <>
       <div className="p-3 flex flex-col gap-y-12 mt-7 h-[100vh] shadow-md w-[300px] fixed bg-white">
@@ -46,6 +49,7 @@ const SideBar = () => {
               deleteCookie("email");
               deleteCookie("token");
               deleteCookie("roles");
+              dispatch(cartActions.clearCart());
               window.location.href = "/login";
             }}
           >

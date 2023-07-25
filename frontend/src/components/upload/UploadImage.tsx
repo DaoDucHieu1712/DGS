@@ -29,12 +29,11 @@ const UploadImage = ({ onChange, name }: UploadImageProps) => {
       return;
     }
     const imageObj = {
-      medium: imageData.medium.url,
       thumb: imageData.thumb.url,
       url: imageData.url,
     };
-    onChange(name, imageObj.medium);
-    setImageURL(imageObj.medium);
+    onChange(name, imageObj.thumb);
+    setImageURL(imageObj.thumb);
   };
   return (
     <>

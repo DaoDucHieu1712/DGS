@@ -69,6 +69,7 @@ const Header = () => {
                 deleteCookie("token");
                 deleteCookie("roles");
                 deleteCookie("email");
+                dispatch(cartActions.clearCart());
                 window.location.href = "/login";
               }}
             >
